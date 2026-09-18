@@ -1,39 +1,15 @@
-services:
-  fastapi:
-    build: ./app
-    container_name: sub-mirror-api
-    restart: always
-    env_file: .env
-    networks:
-      - mirror-net
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 15s
+{$DOMAIN} {
+    encode gzip zstd
 
-  caddy:
-    image: caddy:2.9-alpine
-    container_name: sub-mirror-caddy
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - mirror-net
-    depends_on:
-      fastapi:
-        condition: service_healthy
+    reverse_proxy fastapi:8000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Host {host}
+    }
 
-networks:
-  mirror-net:
-    driver: bridge
-
-volumes:
-  caddy_data:
-  caddy_config:
+    log {
+        output stdout
+        format console
+    }
+}

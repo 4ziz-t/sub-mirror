@@ -49,16 +49,9 @@ ok "Docker Compose готов"
 
 
 INSTALL_DIR="${INSTALL_DIR:-/opt/sub-mirror}"
+REPO_URL="${REPO_URL:-https://github.com/Aziz961/sub-mirror.git}"
 
-echo
 info "Директория установки: ${BOLD}${INSTALL_DIR}${NC}"
-read -rp "Оставить? [Y/n]: " confirm_dir
-confirm_dir=${confirm_dir:-Y}
-if [[ ! "$confirm_dir" =~ ^[Yy]$ ]]; then
-    read -rp "Введи путь: " INSTALL_DIR
-    INSTALL_DIR="${INSTALL_DIR%/}"
-fi
-
 mkdir -p "$INSTALL_DIR"
 cd "$INSTALL_DIR"
 
@@ -77,17 +70,6 @@ if [[ -n "$SCRIPT_SOURCE" ]]; then
         || cp -a "$SCRIPT_SOURCE"/. "$INSTALL_DIR"/
     ok "Файлы скопированы"
 else
-    REPO_URL="${REPO_URL:-}"
-    if [[ -z "$REPO_URL" ]]; then
-        echo
-        warn "Скрипт запущен не из репозитория."
-        echo "Укажи URL репозитория на GitHub (HTTPS), например:"
-        echo "  https://github.com/Aziz961/sub-mirror.git"
-        read -rp "REPO_URL: " REPO_URL
-        REPO_URL=$(echo "$REPO_URL" | tr -d '[:space:]')
-        [[ -n "$REPO_URL" ]] || error "REPO_URL обязателен"
-    fi
-
     if [[ -d .git ]]; then
         info "Обновляю существующий репозиторий..."
         git pull --ff-only || warn "git pull не удался, продолжаю с текущими файлами"
