@@ -9,3 +9,4 @@ caddy_config/
 .vscode/
 *.swp
 *.swo
+Caddyfile
