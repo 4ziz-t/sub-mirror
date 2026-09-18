@@ -30,23 +30,6 @@ sudo bash install.sh
 
 ---
 
-## Структура проекта
-
-```
-sub-mirror/
-├── app/
-│   ├── Dockerfile
-│   ├── main.py          # FastAPI reverse-proxy
-│   └── requirements.txt
-├── docker-compose.yml
-├── Caddyfile.template
-├── install.sh
-├── .env.example
-└── README.md
-```
-
----
-
 ## Команды после установки
 
 ```bash
