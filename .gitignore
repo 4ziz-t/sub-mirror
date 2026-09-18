@@ -1,0 +1,11 @@
+.env
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+caddy_data/
+caddy_config/
+.idea/
+.vscode/
+*.swp
+*.swo

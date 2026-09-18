@@ -1,0 +1,15 @@
+{$DOMAIN} {
+    encode gzip zstd
+
+    reverse_proxy fastapi:8000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Host {host}
+    }
+
+    log {
+        output stdout
+        format console
+    }
+}
