@@ -8,7 +8,6 @@
 
 ## Установка одной командой
 
-После того как зальёшь репозиторий на GitHub, на сервере:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Aziz961/sub-mirror/main/install.sh | sudo bash
