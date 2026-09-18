@@ -101,7 +101,7 @@ echo
 
 # Домен
 while true; do
-    read -rp "Домен (mirror.example.com): " DOMAIN
+    read -rp "Домен этого сервера (mirror.example.com): " DOMAIN
     DOMAIN=$(echo "$DOMAIN" | tr -d '[:space:]')
     if [[ -n "$DOMAIN" ]]; then
         break
@@ -178,6 +178,4 @@ echo "  docker compose ps               # статус"
 echo "  docker compose restart          # перезапуск"
 echo "  docker compose down             # остановить"
 echo
-info "DNS: A-запись ${DOMAIN} → IP этого сервера"
-info "Caddy сам получит SSL (Let's Encrypt). Порты 80 и 443 должны быть открыты."
 echo
