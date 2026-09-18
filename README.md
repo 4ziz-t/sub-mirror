@@ -9,7 +9,7 @@
 ## Установка одной командой
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Aziz961/sub-mirror/main/install.sh -o /tmp/install.sh
+curl -fsSL https://raw.githubusercontent.com/4ziz-t/sub-mirror/main/install.sh -o /tmp/install.sh
 sudo bash /tmp/install.sh
 ```
 
@@ -23,7 +23,7 @@ sudo bash /tmp/install.sh
 ## Установка из клона
 
 ```bash
-git clone https://github.com/Aziz961/sub-mirror.git
+git clone https://github.com/4ziz-t/sub-mirror.git
 cd sub-mirror
 sudo bash install.sh
 ```

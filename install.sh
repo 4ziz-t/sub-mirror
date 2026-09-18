@@ -49,7 +49,7 @@ ok "Docker Compose готов"
 
 
 INSTALL_DIR="${INSTALL_DIR:-/opt/sub-mirror}"
-REPO_URL="${REPO_URL:-https://github.com/Aziz961/sub-mirror.git}"
+REPO_URL="${REPO_URL:-https://github.com/4ziz-t/sub-mirror.git}"
 
 info "Директория установки: ${BOLD}${INSTALL_DIR}${NC}"
 mkdir -p "$INSTALL_DIR"
