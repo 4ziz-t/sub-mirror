@@ -62,7 +62,7 @@ async def proxy(path: str, request: Request):
             headers[key] = value
 
 
-    headers["Accept-Encoding"] = "gzip, deflate"
+    headers["Accept-Encoding"] = "identity"
 
     client_ip = request.client.host if request.client else "0.0.0.0"
     headers["X-Real-IP"] = client_ip
@@ -103,6 +103,17 @@ async def proxy(path: str, request: Request):
     for key, value in resp.headers.items():
         if key.lower() not in HOP_BY_HOP_HEADERS:
             response_headers[key] = value
+
+    # Debug: log key response info to diagnose encoding / binary issues
+    ct = resp.headers.get("content-type", "")
+    ce = resp.headers.get("content-encoding", "")
+    body_preview = resp.content[:80]
+    is_binary = any(b < 9 or (b > 13 and b < 32) for b in body_preview) if body_preview else False
+    logger.info(
+        f"← {resp.status_code} | ct={ct} | ce={ce or 'none'} | "
+        f"len={len(resp.content)} | binary={is_binary} | "
+        f"preview={body_preview!r}"
+    )
 
     return Response(
         content=resp.content,
