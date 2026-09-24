@@ -61,6 +61,9 @@ async def proxy(path: str, request: Request):
         if key.lower() not in HOP_BY_HOP_HEADERS:
             headers[key] = value
 
+
+    headers["Accept-Encoding"] = "gzip, deflate"
+
     client_ip = request.client.host if request.client else "0.0.0.0"
     headers["X-Real-IP"] = client_ip
     headers["X-Forwarded-For"] = client_ip
