@@ -24,6 +24,11 @@ HOP_BY_HOP_HEADERS = {
     "host",
     "content-length",
     "content-encoding",
+    "if-match",
+    "if-none-match",
+    "if-modified-since",
+    "if-unmodified-since",
+    "if-range",
 }
 
 # ====================== LOGGING ======================
